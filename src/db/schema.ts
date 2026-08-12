@@ -12,3 +12,14 @@ export const todos = pgTable('todos', {
 export type Todo = typeof todos.$inferSelect;
 export type NewTodo = typeof todos.$inferInsert;
 
+
+export const users = pgTable('users', {
+    id: serial('id').primaryKey(),
+    email: varchar('email', { length: 255 }).notNull().unique(),
+    passwordHash: text('password_hash').notNull(),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+export type User = typeof users.$inferSelect;
+export type NewUser = typeof users.$inferInsert;

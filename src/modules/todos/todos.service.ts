@@ -10,6 +10,7 @@ export class TodosService {
 
     async findOne(id: number): Promise<Todo | null> {
         const task = await db.select().from(todos).where(eq(todos.id, id)).then((rows) => rows[0] || null);
+        if(!task) throw new Error (`Todo with id ${id} not found`);
         return task;
     }
 
